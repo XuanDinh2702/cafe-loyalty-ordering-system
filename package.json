@@ -1,0 +1,10 @@
+{
+  "name": "cafe-loyalty-and-ordering-system",
+  "version": "1.0.0",
+  "description": "Hệ thống Đặt Món, Đặt Bàn & Tích Điểm Quán Cà Phê (Aura Cafe)",
+  "scripts": {
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed"
+  }
+}
