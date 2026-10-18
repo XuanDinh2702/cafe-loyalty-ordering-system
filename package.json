@@ -6,5 +6,8 @@
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "seed": "cd server && npm run seed"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
   }
 }

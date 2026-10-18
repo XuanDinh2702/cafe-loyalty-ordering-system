@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>README CAFE - Bài Thuyết Trình Demo (Dành Cho Học Sinh)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background-color: #1c100b;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+    }
+    .slide.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="text-stone-900 select-none">
+
+  <!-- SLIDE 1: BÌA CHÍNH -->
+  <section class="slide active flex-col items-center justify-center p-8 bg-gradient-to-br from-stone-950 via-[#3d2015] to-[#22110a] text-white text-center relative" data-index="1">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-500/30 mb-6">
+      🚀 Chuyến Du Hành Công Nghệ Nhí
+    </div>
+    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight max-w-4xl font-sans text-stone-50">
+      KHÁM PHÁ QUÁN NƯỚC THÔNG MINH <br/>
+      <span class="text-amber-400">README CAFE 4.0</span>
+    </h1>
+    <p class="text-stone-300 text-base md:text-xl mt-4 max-w-2xl leading-relaxed">
+      Cùng học làm Khách Hàng Thông Thái, Chú Thu Ngân Siêu Tốc & Bác Quản Lý Quán Tài Ba!
+    </p>
+
+    <div class="flex flex-wrap gap-4 justify-center mt-10">
+      <div class="px-5 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-sm font-bold flex items-center gap-2">
+        ☕ Gọi món ngon ngập tràn
+      </div>
+      <div class="px-5 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-sm font-bold flex items-center gap-2 text-amber-300">
+        ⭐ Uống nước tích điểm đổi quà
+      </div>
+      <div class="px-5 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-sm font-bold flex items-center gap-2 text-sky-300">
+        🪑 Giữ chỗ ngồi đẹp ngắm phố
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: ĐIỀU KỲ DIỆU -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-[#fdfbf7]" data-index="2">
+    <div class="max-w-6xl mx-auto w-full">
+      <span class="text-xs font-black uppercase tracking-widest text-amber-800">Điều Kỳ Diệu Tại Quán</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mt-1 mb-8">Quán Nước Công Nghệ Có Gì Lạ Hơn Quán Thường?</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-7 rounded-3xl border border-stone-200 shadow-sm space-y-3">
+          <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-2xl font-bold">
+            📱
+          </div>
+          <h3 class="text-xl font-bold text-stone-900">Không Lo Hết Chỗ</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Ở nhà mở điện thoại lên là xem được sơ đồ bàn, chọn trước bàn sân vườn mát rượi hoặc ban công lộng gió mà không sợ bị trùng lịch với ai!
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-stone-200 shadow-sm space-y-3">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl font-bold">
+            ⭐
+          </div>
+          <h3 class="text-xl font-bold text-stone-900">Ví Điểm Thần Kỳ</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Không cần giữ thẻ giấy dễ rách! Mỗi ly nước uống đều được máy tính tự cộng sao tích lũy vào tài khoản để đổi bánh ngọt miễn phí.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-stone-200 shadow-sm space-y-3">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold">
+            ⚡
+          </div>
+          <h3 class="text-xl font-bold text-stone-900">Tính Tiền Nhanh Như Chớp</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Không cần đứng xếp hàng mỏi chân! Chú thu ngân chỉ cần gõ số điện thoại là máy tự tính tiền và in ra tờ hóa đơn ro ro cực chuẩn xác.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: VAI TRÒ 1 - KHÁCH HÀNG NHÍ -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-[#fdfbf7]" data-index="3">
+    <div class="max-w-6xl mx-auto w-full">
+      <span class="text-xs font-black uppercase tracking-widest text-amber-800">Khám Phá Vai Trò 1</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mt-1 mb-8">🧒 Bạn Khách Hàng Thông Thái: Chọn Món & Đặt Bàn</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
+          <h3 class="text-2xl font-bold text-amber-900 flex items-center gap-2">
+            🍹 Thực Đơn Hấp Dẫn
+          </h3>
+          <ul class="space-y-3 text-stone-700 text-sm md:text-base leading-relaxed">
+            <li>• <strong>4 Nhóm đồ uống:</strong> Cà phê sữa truyền thống, Trà trái cây nhiệt đới, Bánh ngọt nướng thơm phức và Đá xay mát lạnh.</li>
+            <li>• <strong>Hình ảnh chân thật:</strong> Món nào cũng có hình ảnh và mô tả vị ngon rõ ràng.</li>
+            <li>• <strong>Thanh tìm kiếm siêu tốc:</strong> Gõ 'Trà đào' hay 'Bánh phô mai' là tìm thấy liền!</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
+          <h3 class="text-2xl font-bold text-amber-900 flex items-center gap-2">
+            🪑 Sơ Đồ Bàn 3 Không Gian
+          </h3>
+          <ul class="space-y-3 text-stone-700 text-sm md:text-base leading-relaxed">
+            <li>• <strong>Trong nhà:</strong> Máy lạnh mát rượi, yên tĩnh đọc truyện.</li>
+            <li>• <strong>Sân vườn:</strong> Cây xanh thoáng mát, nghe tiếng chim hót.</li>
+            <li>• <strong>Tầng thượng:</strong> Ngắm hoàng hôn và phố phường lấp lánh đèn.</li>
+            <li>• <strong>Chống trùng lịch:</strong> Máy tính sẽ tự động từ chối nếu có người vừa giữ bàn đó!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: TÍCH ĐIỂM ĐỔI QUÀ -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-[#fdfbf7]" data-index="4">
+    <div class="max-w-6xl mx-auto w-full space-y-6">
+      <div>
+        <span class="text-xs font-black uppercase tracking-widest text-amber-800">Quy Tắc Tích Lũy</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mt-1">⭐ Uống Nước Tích Sao – Đổi Ngàn Voucher Giảm Giá</h2>
+      </div>
+
+      <div class="p-4 bg-amber-50 border-2 border-amber-300 rounded-2xl text-amber-950 font-bold text-sm md:text-base flex items-center justify-center gap-2">
+        🎯 QUY TẮC VÀNG: Cứ 10.000 VNĐ chi tiêu thực trả = Nhận ngay 1 Điểm Sao ⭐ vào tài khoản!
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-3xl border-2 border-orange-200 shadow-sm text-center space-y-2">
+          <span class="px-3 py-1 bg-orange-100 text-orange-800 font-extrabold rounded-full text-xs">Hạng Đồng 🥉</span>
+          <h4 class="text-lg font-bold text-stone-900">Khách Mới Bắt Đầu</h4>
+          <p class="text-xs text-stone-500">Chi tiêu dưới 1 triệu VNĐ</p>
+          <p class="text-xs text-stone-600 pt-2 border-t">Tích lũy những điểm sao đầu tiên</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-300 shadow-sm text-center space-y-2">
+          <span class="px-3 py-1 bg-slate-100 text-slate-800 font-extrabold rounded-full text-xs">Hạng Bạc 🥈</span>
+          <h4 class="text-lg font-bold text-stone-900">Khách Thân Quen</h4>
+          <p class="text-xs text-stone-500">Chi tiêu từ 1 - 5 triệu VNĐ</p>
+          <p class="text-xs text-stone-600 pt-2 border-t">Tặng voucher sinh nhật & đổi quà bánh</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-400 shadow-sm text-center space-y-2 bg-gradient-to-b from-amber-50/50 to-white">
+          <span class="px-3 py-1 bg-amber-400 text-stone-950 font-black rounded-full text-xs">Hạng Vàng 🥇</span>
+          <h4 class="text-lg font-bold text-stone-900">Hội Viên VIP</h4>
+          <p class="text-xs text-stone-500">Chi tiêu trên 5 triệu VNĐ</p>
+          <p class="text-xs text-stone-600 pt-2 border-t">Ưu tiên bàn đẹp nhất & đổi voucher 50.000đ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: VAI TRÒ 2 - THU NGÂN POS -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-[#fdfbf7]" data-index="5">
+    <div class="max-w-6xl mx-auto w-full">
+      <span class="text-xs font-black uppercase tracking-widest text-amber-800">Khám Phá Vai Trò 2</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mt-1 mb-8">🧑‍💼 Chú Thu Ngân Bán Hàng: Màn Hình POS Siêu Tốc</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2 text-center">
+          <div class="w-10 h-10 rounded-full bg-amber-800 text-white font-bold mx-auto flex items-center justify-center">1</div>
+          <h4 class="font-bold text-stone-900">Bấm Món Chạm</h4>
+          <p class="text-xs text-stone-500 leading-relaxed">Chỉ cần chạm nhẹ vào màn hình là ly trà sữa tự chui vào giỏ hàng.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2 text-center">
+          <div class="w-10 h-10 rounded-full bg-amber-800 text-white font-bold mx-auto flex items-center justify-center">2</div>
+          <h4 class="font-bold text-stone-900">Tìm SĐT Khách</h4>
+          <p class="text-xs text-stone-500 leading-relaxed">Khách đọc số điện thoại, máy hiện ngay tên và số điểm sao tích lũy.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2 text-center">
+          <div class="w-10 h-10 rounded-full bg-amber-800 text-white font-bold mx-auto flex items-center justify-center">3</div>
+          <h4 class="font-bold text-stone-900">Áp Voucher</h4>
+          <p class="text-xs text-stone-500 leading-relaxed">Khách có mã giảm giá? Bấm 1 nút là tự trừ tiền, không sợ tính nhầm.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2 text-center">
+          <div class="w-10 h-10 rounded-full bg-amber-800 text-white font-bold mx-auto flex items-center justify-center">4</div>
+          <h4 class="font-bold text-stone-900">In Hóa Đơn Xịn</h4>
+          <p class="text-xs text-stone-500 leading-relaxed">Máy tự cộng điểm mới và in bill nhiệt ro ro đưa khách mang về.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: VAI TRÒ 3 - QUẢN LÝ QUÁN -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-[#fdfbf7]" data-index="6">
+    <div class="max-w-6xl mx-auto w-full">
+      <span class="text-xs font-black uppercase tracking-widest text-amber-800">Khám Phá Vai Trò 3</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mt-1 mb-8">👑 Bác Quản Lý Quán (Admin): Điều Hành Như Người Lớn!</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-7 rounded-3xl border border-stone-200 shadow-sm space-y-3">
+          <h3 class="text-lg font-bold text-stone-900">📊 Bảng Doanh Thu</h3>
+          <ul class="text-xs md:text-sm text-stone-600 space-y-2 leading-relaxed">
+            <li>• Biết hôm nay bán được bao nhiêu tiền.</li>
+            <li>• Xem món nào được các bạn thích nhất (Top 1).</li>
+            <li>• Đếm xem quán đã tặng bao nhiêu điểm sao.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-stone-200 shadow-sm space-y-3">
+          <h3 class="text-lg font-bold text-stone-900">🍴 Quản Lý Menu & Bàn</h3>
+          <ul class="text-xs md:text-sm text-stone-600 space-y-2 leading-relaxed">
+            <li>• Món nào hết nguyên liệu? Đổi trạng thái 'Tạm hết'.</li>
+            <li>• Tự thêm món sinh tố mới sáng tạo.</li>
+            <li>• Nhìn bản đồ bàn xem bàn nào đang có khách ngồi.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-stone-200 shadow-sm space-y-3">
+          <h3 class="text-lg font-bold text-stone-900">🎟️ Kho Ưu Đãi & Nhân Sự</h3>
+          <ul class="text-xs md:text-sm text-stone-600 space-y-2 leading-relaxed">
+            <li>• Tạo mã giảm giá mừng ngày Quốc tế Thiếu nhi.</li>
+            <li>• Đặt số điểm cần đổi cho từng mã ưu đãi.</li>
+            <li>• Cấp tài khoản làm việc cho các chú thu ngân.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: LIVE DEMO THỰC HÀNH -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-gradient-to-br from-stone-950 via-[#3d2015] to-[#22110a] text-white" data-index="7">
+    <div class="max-w-6xl mx-auto w-full">
+      <span class="text-xs font-black uppercase tracking-widest text-amber-400">Giờ Biểu Diễn Trực Tiếp</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1 mb-8">🎬 Kịch Bản Trình Diễn Live 4 Bước Cực Hay!</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/15 space-y-2">
+          <span class="text-amber-400 font-black text-sm">BƯỚC 1</span>
+          <h4 class="font-bold text-white text-base">Đăng Nhập Khách VIP</h4>
+          <p class="text-xs text-stone-300 leading-relaxed">Bấm Đăng Nhập -> Chọn 'Khách VIP' để khoe chiếc Thẻ Vàng 125 điểm lấp lánh!</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/15 space-y-2">
+          <span class="text-amber-400 font-black text-sm">BƯỚC 2</span>
+          <h4 class="font-bold text-white text-base">Đặt Bàn Trước</h4>
+          <p class="text-xs text-stone-300 leading-relaxed">Vào mục Đặt Bàn, chọn bàn T08 tầng thượng ngắm phố, gửi phiếu đặt trong 3 giây.</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/15 space-y-2">
+          <span class="text-amber-400 font-black text-sm">BƯỚC 3</span>
+          <h4 class="font-bold text-white text-base">Bán Hàng POS</h4>
+          <p class="text-xs text-stone-300 leading-relaxed">Đăng nhập tài khoản thu ngân -> Chọn 2 ly trà đào -> Gõ SĐT khách để tích sao và in hóa đơn!</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/15 space-y-2">
+          <span class="text-amber-400 font-black text-sm">BƯỚC 4</span>
+          <h4 class="font-bold text-white text-base">Admin Xem Doanh Thu</h4>
+          <p class="text-xs text-stone-300 leading-relaxed">Đăng nhập admin -> Thấy ngay hóa đơn vừa bán, điểm số và doanh thu nhảy tức thì.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: CÂU ĐỐ VUI (QUIZ) -->
+  <section class="slide flex-col justify-center p-8 md:p-16 bg-[#fdfbf7]" data-index="8">
+    <div class="max-w-5xl mx-auto w-full space-y-6">
+      <div>
+        <span class="text-xs font-black uppercase tracking-widest text-amber-800">Thử Thách Trí Nhớ</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-stone-900 mt-1">💡 Góc Câu Đố Vui Về Quán Cà Phê Thông Minh!</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-6 bg-white rounded-3xl border border-stone-200 shadow-sm">
+          <p class="font-bold text-base text-stone-900">Câu 1: Cần uống bao nhiêu tiền để được nhận 1 Điểm Sao ⭐?</p>
+          <p class="text-emerald-700 font-extrabold text-sm mt-2">👉 Đáp án: 10.000 VNĐ (Ví dụ: Mua ly trà 50k = nhận ngay 5 điểm!)</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-3xl border border-stone-200 shadow-sm">
+          <p class="font-bold text-base text-stone-900">Câu 2: Hai người có thể đặt cùng 1 chiếc bàn trong cùng một giờ không?</p>
+          <p class="text-emerald-700 font-extrabold text-sm mt-2">👉 Đáp án: Không thể! Hệ thống máy tính sẽ tự động ngăn chặn chống trùng lịch.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-3xl border border-stone-200 shadow-sm">
+          <p class="font-bold text-base text-stone-900">Câu 3: Điểm sao tích lũy dùng để làm gì thích nhất?</p>
+          <p class="text-emerald-700 font-extrabold text-sm mt-2">👉 Đáp án: Dùng để đổi các mã giảm giá (Voucher) mua nước và bánh ngọt miễn phí!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9: TỔNG KẾT & CẢM ƠN -->
+  <section class="slide flex-col items-center justify-center p-8 bg-gradient-to-br from-stone-950 via-[#3d2015] to-[#22110a] text-white text-center" data-index="9">
+    <span class="text-amber-400 font-bold uppercase tracking-widest text-xs mb-3">Công Nghệ Giúp Cuộc Sống Vui Hơn!</span>
+    <h2 class="text-3xl md:text-5xl font-black text-white max-w-3xl leading-tight">
+      CẢM ƠN CÁC THẦY CÔ & CÁC BẠN NHỎ ĐÃ LẮNG NGHE!
+    </h2>
+
+    <div class="mt-8 p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 text-xs md:text-sm max-w-lg mx-auto space-y-2 text-stone-200 text-left">
+      <p>🌐 <strong>Trải nghiệm trực tiếp website:</strong> http://localhost:3000</p>
+      <p>💻 <strong>Kho mã nguồn GitHub:</strong> github.com/XuanDinh2702/cafe-loyalty-ordering-system</p>
+      <p>☕ <strong>README CAFE:</strong> Đặt món, Đặt bàn & Tích điểm thông minh</p>
+    </div>
+  </section>
+
+  <!-- PRESENTATION CONTROLS (Floating Footer) -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-stone-900/90 backdrop-blur-md text-white px-5 py-2.5 rounded-full border border-white/20 shadow-2xl z-50">
+    <button id="prevBtn" class="px-3 py-1 hover:bg-white/20 rounded-full font-bold text-xs transition">◀ Trang trước</button>
+    <span id="slideIndicator" class="font-mono text-xs font-bold text-amber-400 px-2">1 / 9</span>
+    <button id="nextBtn" class="px-3 py-1 hover:bg-white/20 rounded-full font-bold text-xs transition">Trang sau ▶</button>
+    <div class="w-px h-4 bg-white/20 mx-1"></div>
+    <button id="fullBtn" class="px-3 py-1 hover:bg-white/20 rounded-full text-xs font-bold transition">⛶ Toàn màn hình</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === index);
+      });
+
+      currentIndex = index;
+      document.getElementById('slideIndicator').textContent = `${currentIndex + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => showSlide(currentIndex - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => showSlide(currentIndex + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') showSlide(currentIndex + 1);
+      if (e.key === 'ArrowLeft') showSlide(currentIndex - 1);
+    });
+
+    document.getElementById('fullBtn').addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+  </script>
+</body>
+</html>
