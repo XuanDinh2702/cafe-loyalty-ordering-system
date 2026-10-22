@@ -181,37 +181,72 @@ export default function ActiveOrdersPage() {
                 </div>
 
                 {/* Info row */}
-                <div className="text-xs space-y-1 text-stone-600">
-                  <div className="flex justify-between">
-                    <span>Hình thức:</span>
-                    <strong className="text-stone-800">
-                      {o.order_type === 'DINE_IN' ? (
-                        `Tại quán (Bàn ${o.table_id?.table_number || 'N/A'})`
-                      ) : (
-                        'Mang về (Takeaway)'
-                      )}
-                    </strong>
+                <div className="text-xs space-y-1.5 text-stone-600">
+                  <div className="flex items-center justify-between">
+                    <span className="text-stone-500">Hình thức:</span>
+                    {o.order_type === 'DINE_IN' ? (
+                      <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-extrabold text-xs border border-amber-300">
+                        ☕ Bàn {o.table_id?.table_number || 'Chưa gán'}
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-800 font-bold text-xs">
+                        🛍️ Mang về
+                      </span>
+                    )}
                   </div>
 
                   {o.customer_id && (
-                    <div className="flex justify-between">
-                      <span>Khách hàng:</span>
-                      <strong className="text-amber-900 truncate max-w-[170px]">
+                    <div className="flex justify-between items-center">
+                      <span className="text-stone-500">Khách hàng:</span>
+                      <strong className="text-stone-800 truncate max-w-[170px]">
                         {o.customer_id.full_name} ({o.customer_id.phone})
                       </strong>
                     </div>
                   )}
 
+                  {/* Items List directly visible for Barista */}
+                  {o.items && o.items.length > 0 && (
+                    <div className="bg-stone-50/80 rounded-xl p-2.5 my-2 border border-stone-200/70 space-y-1.5">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                        Danh sách món ({o.items.reduce((sum, it) => sum + (it.quantity || 1), 0)} ly/phần)
+                      </div>
+                      {o.items.map((it, idx) => (
+                        <div key={idx} className="flex items-start justify-between text-xs pt-1 border-t border-stone-200/40 first:border-t-0 first:pt-0">
+                          <div>
+                            <span className="font-extrabold text-stone-900">
+                              {it.quantity}x
+                            </span>{' '}
+                            <span className="text-stone-800 font-medium">{it.item_name}</span>
+                            {it.note && (
+                              <span className="block text-[11px] text-amber-800 font-semibold italic">
+                                👉 {it.note}
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-stone-500 font-mono text-[11px] ml-2">
+                            {formatVND(it.total_price)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {o.notes && (
+                    <div className="px-2.5 py-1.5 bg-amber-50 rounded-lg text-[11px] text-amber-900 border border-amber-200/60 font-medium">
+                      📝 {o.notes}
+                    </div>
+                  )}
+
                   <div className="flex justify-between pt-1 border-t border-stone-100">
-                    <span>Thanh toán:</span>
-                    <span className="font-extrabold text-stone-900 text-sm">
+                    <span className="text-stone-500">Tổng tiền:</span>
+                    <span className="font-black text-amber-950 text-sm">
                       {formatVND(o.total_amount)}
                     </span>
                   </div>
 
                   {o.points_earned > 0 && (
                     <div className="flex justify-between text-[11px] text-emerald-700 font-medium">
-                      <span>Điểm tích lũy:</span>
+                      <span>Tích lũy:</span>
                       <span>+{o.points_earned} điểm</span>
                     </div>
                   )}

@@ -228,12 +228,20 @@ exports.getOrders = async (req, res) => {
       Order.countDocuments(filter)
     ]);
 
+    const orderIds = orders.map(o => o._id);
+    const orderItems = await OrderItem.find({ order_id: { $in: orderIds } });
+    const ordersWithItems = orders.map(o => {
+      const oObj = o.toObject();
+      oObj.items = orderItems.filter(item => String(item.order_id) === String(o._id));
+      return oObj;
+    });
+
     res.json({
       success: true,
       total,
       page: Number(page),
       totalPages: Math.ceil(total / Number(limit)),
-      orders
+      orders: ordersWithItems
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -343,6 +351,200 @@ exports.cancelOrder = async (req, res) => {
       success: true,
       message: `Đã hủy đơn hàng #${order.order_code} và hoàn trả điểm thưởng/voucher thành công`,
       order
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Create a table self-order directly from web (Customer / QR at table)
+exports.createTableOrder = async (req, res) => {
+  try {
+    const {
+      table_number,
+      table_id,
+      customer_id,
+      customer_phone,
+      items,
+      customer_voucher_id,
+      notes
+    } = req.body;
+
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ success: false, message: 'Đơn hàng phải có ít nhất 1 món' });
+    }
+
+    // 1. Resolve Table
+    let resolvedTable = null;
+    if (table_id) {
+      resolvedTable = await Table.findById(table_id);
+    } else if (table_number) {
+      resolvedTable = await Table.findOne({ table_number: String(table_number).trim().toUpperCase() });
+      if (!resolvedTable) {
+        resolvedTable = await Table.findOne({ table_number: String(table_number).trim() });
+      }
+    }
+
+    if (!resolvedTable) {
+      return res.status(400).json({ success: false, message: 'Vui lòng chọn số bàn hợp lệ trước khi đặt món' });
+    }
+
+    // 2. Resolve Customer (by id or phone for loyalty points)
+    let resolvedCustomer = null;
+    if (customer_id) {
+      resolvedCustomer = await Customer.findById(customer_id);
+    } else if (customer_phone) {
+      resolvedCustomer = await Customer.findOne({ phone: String(customer_phone).trim() });
+    }
+
+    // 3. Validate items & calculate Subtotal
+    let subtotal = 0;
+    const validatedItems = [];
+
+    for (const item of items) {
+      const menuItem = await MenuItem.findById(item.menu_item_id);
+      if (!menuItem) {
+        return res.status(404).json({ success: false, message: `Không tìm thấy món ID: ${item.menu_item_id}` });
+      }
+
+      const qty = Math.max(1, Number(item.quantity) || 1);
+      const unitPrice = Number(menuItem.price);
+      const itemTotal = qty * unitPrice;
+      subtotal += itemTotal;
+
+      validatedItems.push({
+        menu_item_id: menuItem._id,
+        item_name: menuItem.name,
+        quantity: qty,
+        unit_price: unitPrice,
+        total_price: itemTotal,
+        note: item.note || ''
+      });
+    }
+
+    // 4. Voucher discount calculation
+    let discountAmount = 0;
+    let appliedCustomerVoucher = null;
+
+    if (customer_voucher_id && resolvedCustomer) {
+      appliedCustomerVoucher = await CustomerVoucher.findOne({
+        _id: customer_voucher_id,
+        customer_id: resolvedCustomer._id
+      }).populate('voucher_id');
+
+      if (appliedCustomerVoucher && appliedCustomerVoucher.status === 'AVAILABLE') {
+        const voucher = appliedCustomerVoucher.voucher_id;
+        const now = new Date();
+        if (appliedCustomerVoucher.expires_at >= now) {
+          if (!voucher.min_order_value || subtotal >= voucher.min_order_value) {
+            if (voucher.discount_type === 'PERCENTAGE') {
+              let calculated = (subtotal * voucher.discount_value) / 100;
+              if (voucher.max_discount_amount && calculated > voucher.max_discount_amount) {
+                calculated = voucher.max_discount_amount;
+              }
+              discountAmount = Math.round(calculated);
+            } else {
+              discountAmount = Math.min(subtotal, voucher.discount_value);
+            }
+          }
+        }
+      }
+    }
+
+    const totalAmount = Math.max(0, subtotal - discountAmount);
+    // Loyalty Rule: 10,000 VND = 1 point
+    const pointsEarned = resolvedCustomer ? Math.floor(totalAmount / 10000) : 0;
+    const orderCode = await generateOrderCode();
+
+    // 5. Create Order with status PREPARING for kitchen/barista
+    const order = await Order.create({
+      customer_id: resolvedCustomer ? resolvedCustomer._id : null,
+      staff_id: null,
+      table_id: resolvedTable._id,
+      customer_voucher_id: appliedCustomerVoucher ? appliedCustomerVoucher._id : null,
+      order_code: orderCode,
+      order_type: 'DINE_IN',
+      subtotal,
+      discount_amount: discountAmount,
+      total_amount: totalAmount,
+      points_earned: pointsEarned,
+      payment_method: 'CASH',
+      payment_status: 'PENDING',
+      status: 'PREPARING',
+      notes: notes || ''
+    });
+
+    // 6. Create OrderItems
+    const createdItems = await Promise.all(
+      validatedItems.map(item =>
+        OrderItem.create({
+          ...item,
+          order_id: order._id
+        })
+      )
+    );
+
+    // 7. Update voucher if applied
+    if (appliedCustomerVoucher) {
+      appliedCustomerVoucher.status = 'USED';
+      appliedCustomerVoucher.used_at = new Date();
+      await appliedCustomerVoucher.save();
+    }
+
+    // 8. Update customer loyalty points
+    if (resolvedCustomer && pointsEarned > 0) {
+      resolvedCustomer.current_points += pointsEarned;
+      resolvedCustomer.total_spent += totalAmount;
+      resolvedCustomer.updateTier();
+      await resolvedCustomer.save();
+
+      await PointTransaction.create({
+        customer_id: resolvedCustomer._id,
+        order_id: order._id,
+        type: 'EARN',
+        points: pointsEarned,
+        balance_after: resolvedCustomer.current_points,
+        description: `Tích điểm gọi món tại bàn #${orderCode} (+${pointsEarned} điểm)`
+      });
+    }
+
+    // 9. Update table status to OCCUPIED
+    resolvedTable.status = 'OCCUPIED';
+    await resolvedTable.save();
+
+    const populatedOrder = await Order.findById(order._id)
+      .populate('customer_id', 'full_name phone membership_tier current_points')
+      .populate('table_id', 'table_number area');
+
+    res.status(201).json({
+      success: true,
+      message: `Đã gửi đơn gọi món Bàn ${resolvedTable.table_number} vào quầy Barista thành công!`,
+      order: populatedOrder,
+      items: createdItems
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Customer order tracking by order code (public)
+exports.trackOrder = async (req, res) => {
+  try {
+    const { code } = req.params;
+    const order = await Order.findOne({ order_code: code.trim().toUpperCase() })
+      .populate('customer_id', 'full_name phone')
+      .populate('table_id', 'table_number area');
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Không tìm thấy đơn hàng' });
+    }
+
+    const items = await OrderItem.find({ order_id: order._id });
+
+    res.json({
+      success: true,
+      order,
+      items
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

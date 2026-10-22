@@ -75,6 +75,10 @@ const orderSchema = new mongoose.Schema({
     type: String,
     enum: ['PENDING', 'CONFIRMED', 'PREPARING', 'READY', 'COMPLETED', 'CANCELLED'],
     default: 'COMPLETED'
+  },
+  notes: {
+    type: String,
+    default: ''
   }
 }, {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }

@@ -90,8 +90,10 @@ export const api = {
   updateVoucher: (id, data) => request(`/vouchers/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteVoucher: (id) => request(`/vouchers/${id}`, { method: 'DELETE' }),
 
-  // Orders (POS)
+  // Orders (POS & Table Self-Order)
   createOrder: (orderData) => request('/orders', { method: 'POST', body: JSON.stringify(orderData) }),
+  createTableOrder: (orderData) => request('/orders/table-order', { method: 'POST', body: JSON.stringify(orderData) }),
+  trackOrder: (code) => request(`/orders/track/${encodeURIComponent(code)}`),
   getOrders: (params = '') => request(`/orders${params}`),
   getOrderById: (id) => request(`/orders/${id}`),
   updateOrderStatus: (id, status) => request(`/orders/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
